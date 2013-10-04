@@ -33,10 +33,16 @@
 		</dd>
 		<dt><?php echo __('Section'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($membre['Section']['id'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
+			<?php echo $this->Html->link($membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Poste'); ?></dt>
+		<dd>
+			<?php echo h($membre['Poste'][0]['nom']); ?>
 			&nbsp;
 		</dd>
 	</dl>
+	<?php //debug($membre); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

@@ -21,7 +21,7 @@ class MembresController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Membre->recursive = 0;
+		$this->Membre->recursive = 1;
 		$this->set('membres', $this->Paginator->paginate());
 	}
 
