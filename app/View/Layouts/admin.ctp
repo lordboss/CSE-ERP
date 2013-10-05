@@ -4,7 +4,45 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>It's Brain - premium admin HTML template by Eugene Kopyov</title>
 
-<?php echo $this->Html->css(array('main','reset','dataTable','elfinder','fullcalendar','icons','ui_custom','wysiwyg')); ?>
+<?php echo $this->Html->css(array('main')); ?>
+<?php echo $this->Html->script(array(
+			'jquery-1.4.4', 
+			'spinner/jquery.mousewheel',
+			'spinner/ui.spinner',
+			'fileManager/elfinder.min',
+			'flot/jquery.flot',
+			'flot/jquery.flot.pie',
+			'flot/excanvas.min',
+			'dataTables/jquery.dataTables',
+			'dataTables/colResizable.min',
+			'forms/forms',
+			'forms/autogrowtextarea',
+			'forms/autotab',
+			'forms/jquery.validationEngine-en',
+			'forms/jquery.validationEngine',
+			'colorPicker/colorpicker',
+			'uploader/plupload',
+			'uploader/plupload.html5',
+			'uploader/plupload.html4',
+			'uploader/jquery.plupload.queue',
+			'ui/progress',
+			'ui/jquery.jgrowl',
+			'ui/jquery.tipsy',
+			'ui/jquery.alerts',
+			'jBreadCrumb.1.1',
+			'cal.min',
+			'jquery.collapsible.min',
+			'jquery.ToTop',
+			'jquery.listnav',
+			'jquery.sourcerer',
+			'custom'
+		)); 
+?>
+
+<link href="http://fonts.googleapis.com/css?family=Cuprum" rel="stylesheet" type="text/css" />
+
+
+
 
 </head>
 
@@ -14,21 +52,10 @@
 <div id="topNav">
     <div class="fixed">
         <div class="wrapper">
-            <div class="welcome"><a href="#" title=""><img src="/CSE-ERP/images/userPic.png" alt="" /></a><span>Howdy, Eugene!</span></div>
+            <div class="welcome"><a href="#" title=""><?php echo $this->Html->image('/images/userPic.png'); ?></a><span>Bonjour admin</span></div>
             <div class="userNav">
                 <ul>
-                    <li><a href="#" title=""><img src="/CSE-ERP/images/icons/topnav/profile.png" alt="" /><span>Profile</span></a></li>
-                    <li><a href="#" title=""><img src="/CSE-ERP/images/icons/topnav/tasks.png" alt="" /><span>Tasks</span></a></li>
-                    <li class="dd"><img src="/CSE-ERP/images/icons/topnav/messages.png" alt="" /><span>Messages</span><span class="numberTop">8</span>
-                        <ul class="menu_body">
-                            <li><a href="#" title="">new message</a></li>
-                            <li><a href="#" title="">inbox</a></li>
-                            <li><a href="#" title="">outbox</a></li>
-                            <li><a href="#" title="">trash</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#" title=""><img src="/CSE-ERP/images/icons/topnav/settings.png" alt="" /><span>Settings</span></a></li>
-                    <li><a href="login.html" title=""><img src="/CSE-ERP/images/icons/topnav/logout.png" alt="" /><span>Logout</span></a></li>
+                    <li><a href="login.html" title=""><?php echo $this->Html->image('/images/icons/topnav/logout.png'); ?><span>Logout</span></a></li>
                 </ul>
             </div>
             <div class="fix"></div>
@@ -38,7 +65,7 @@
 
 <!-- Header -->
 <div id="header" class="wrapper">
-    <div class="logo"><a href="/" title=""><img src="images/loginLogo.png" alt="" /></a></div>
+    <div class="logo"><a href="/" title=""><?php echo $this->Html->image('/images/loginLogo.png'); ?></a></div>
     <div class="middleNav">
     	<ul>
         	<li class="iMes"><a href="#" title=""><span>Support tickets</span></a><span class="numberMiddle">9</span></li>

@@ -1,68 +1,92 @@
-<div class="membres view">
-<h2><?php echo __('Membre'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Nom'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['nom']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Prenom'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['prenom']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Email'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['email']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Datenaissance'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['datenaissance']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Dateinscription'); ?></dt>
-		<dd>
-			<?php echo h($membre['Membre']['dateinscription']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Section'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Poste'); ?></dt>
-		<dd>
-			<?php echo h($membre['Poste'][0]['nom']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-	<?php //debug($membre); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Membre'), array('action' => 'edit', $membre['Membre']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Membre'), array('action' => 'delete', $membre['Membre']['id']), null, __('Are you sure you want to delete # %s?', $membre['Membre']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Membres'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Membre'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Sections'), array('controller' => 'sections', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Section'), array('controller' => 'sections', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projets'), array('controller' => 'projets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Projet'), array('controller' => 'projets', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Remarques'), array('controller' => 'remarques', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Remarque'), array('controller' => 'remarques', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Competences'), array('controller' => 'competences', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Competence'), array('controller' => 'competences', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Postes'), array('controller' => 'postes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Poste'), array('controller' => 'postes', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
+﻿<div class="title"><h5><?php echo __('Profil membre'); ?></h5></div>
+
+<div class="widgets">
+	<div class="left">
+		<div class="widget">
+			<div class="head"><h5 class="iUser"><?php echo h($membre['Membre']['nom']); ?> <?php echo h($membre['Membre']['prenom']); ?></h5><div class="num"><a href="#" class="blueNum">0</a></div></div>
+			
+			<div class="supTicket nobg">
+				<div class="issueType">
+					<span class="issueInfo"><a href="#" title=""><?php echo $this->Html->link('Section ' . $membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?></a></span>
+					<span class="issueNum"><a href="#" title="">[ #<?php echo h($membre['Membre']['id']); ?> ]</a></span>
+					<div class="fix"></div>
+				</div>
+				
+				<div class="issueSummary">
+					<a href="#" title="" class="floatleft"><?php echo $this->Html->image('/images/user.png'); ?></a>	
+					<div class="ticketInfo">
+						<ul>
+							<li>Poste:</li>
+							<li><strong class="green">[ Adhérent ]</strong></li>
+							<li>E-mail:</li>
+							<li><a href="#" title=""><?php echo h($membre['Membre']['email']); ?></a></li>
+							<li>Date de naissance:</li>
+							<li><?php echo h($membre['Membre']['datenaissance']); ?></li>
+							<li>Date d'inscription:</li>
+							<li><?php echo h($membre['Membre']['dateinscription']); ?></li>
+						</ul>
+						<div class="fix"></div>
+					</div>
+					<div class="fix"></div>
+				</div> 
+			</div>
+			
+		</div>
+		
+		<div class="widget">
+			<div class="head">
+				<h5 class="iFiles">Projets</h5>
+				<div class="num"><a href="#" class="blueNum">3</a></div>
+			</div>
+			<table cellpadding="0" cellspacing="0" width="100%" class="tableStatic">
+				<thead>
+					<tr>
+					  <td width="21%">id</td>
+					  <td>Nom</td>
+					  <td width="21%">Role</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center"><a href="#" title="">2</a></td>
+						<td>gestion ressources humaine</td>
+						<td>Chef de projet</td>
+					</tr>
+					<tr>
+						<td align="center"><a href="#" title="">2</a></td>
+						<td>CSE Toolbar</td>
+						<td>Membre</td>
+					</tr>
+					<tr>
+						<td align="center"><a href="#" title="">2</a></td>
+						<td>Newsletter</td>
+						<td>Membre</td>
+					</tr>
+				</tbody>
+			</table>                    
+		</div>
+	</div>
+	
+	<div class="right">
+		<div class="widget">
+			<div class="head"><h5 class="iPics"><?php echo __('Compétences'); ?></h5></div>
+			
+			<div class="body">
+				<?php foreach ($membre['Competence'] as $competence): ?>
+					<span style="font-size: 16px"><?php echo $this->Form->postLink($this->Html->image('/images/icons/dark/close.png'), array('controller' => 'competencesmembres', 'action' => 'delete', $competence['CompetencesMembre']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $competence['nom'])); ?> <?php echo $competence['nom']; ?></span><br/>
+				<?php endforeach; ?>
+				<a href="#" title="" class="btnIconLeft mr10 mt5"><?php echo $this->Html->image('/images/icons/dark/add.png', array('class' => 'icon')); ?><span>Ajouter une compétence</span></a>
+				<div class="fix"></div>
+			</div>
+			
+		</div>
+	
+	
+	
+	
+	
+	
+
 <div class="related">
 	<h3><?php echo __('Related Projets'); ?></h3>
 	<?php if (!empty($membre['Projet'])): ?>
@@ -131,32 +155,6 @@
 		</ul>
 	</div>
 </div>
-<div class="related">
-	<h3><?php echo __('Related Competences'); ?></h3>
-	<?php if (!empty($membre['Competence'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Nom'); ?></th>
-		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Datecreation'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($membre['Competence'] as $competence): ?>
-		<tr>
-			<td><?php echo $competence['id']; ?></td>
-			<td><?php echo $competence['nom']; ?></td>
-			<td><?php echo $competence['description']; ?></td>
-			<td><?php echo $competence['datecreation']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'competences', 'action' => 'view', $competence['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'competences', 'action' => 'edit', $competence['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'competences', 'action' => 'delete', $competence['id']), null, __('Are you sure you want to delete # %s?', $competence['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
 	<div class="actions">
 		<ul>
@@ -193,5 +191,8 @@
 		<ul>
 			<li><?php echo $this->Html->link(__('New Poste'), array('controller' => 'postes', 'action' => 'add')); ?> </li>
 		</ul>
+	</div>
+</div>
+
 	</div>
 </div>

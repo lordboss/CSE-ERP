@@ -34,6 +34,7 @@ class MembresController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->layout = 'admin';
 		if (!$this->Membre->exists($id)) {
 			throw new NotFoundException(__('Invalid membre'));
 		}
