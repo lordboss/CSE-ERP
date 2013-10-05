@@ -72,6 +72,10 @@ class MembresController extends AppController {
 		));
 		$this->set(compact('sections', 'competences', 'postes', 'projets'));
 	}
+	
+	public function addCompetence() {
+	
+	}
 
 /**
  * edit method

@@ -75,7 +75,7 @@
 				<?php foreach ($membre['Competence'] as $competence): ?>
 					<span style="font-size: 16px"><?php echo $this->Form->postLink($this->Html->image('/images/icons/dark/close.png'), array('controller' => 'competencesmembres', 'action' => 'delete', $competence['CompetencesMembre']['id']), array('escape' => false), __('Are you sure you want to delete # %s?', $competence['nom'])); ?> <?php echo $competence['nom']; ?></span><br/>
 				<?php endforeach; ?>
-				<a href="#" title="" class="btnIconLeft mr10 mt5"><?php echo $this->Html->image('/images/icons/dark/add.png', array('class' => 'icon')); ?><span>Ajouter une compétence</span></a>
+				<a href="<?php echo $this->Html->url(array('controller' => 'competencesmembres', 'action' => 'add', $membre['Membre']['id'])); ?>" title="" class="btnIconLeft mr10 mt5"><?php echo $this->Html->image('/images/icons/dark/add.png', array('class' => 'icon')); ?><span>Ajouter une compétence</span></a>
 				<div class="fix"></div>
 			</div>
 			

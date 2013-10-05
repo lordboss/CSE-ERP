@@ -14,6 +14,8 @@ class ProjetsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+	
+	public $uses = array('Membre', 'Projet');
 
 /**
  * index method
@@ -55,9 +57,11 @@ class ProjetsController extends AppController {
 				$this->Session->setFlash(__('The projet could not be saved. Please, try again.'));
 			}
 		}
-		$membres = $this->Projet->Membre->find('list');
-		$membres = $this->Projet->Membre->find('list');
-		$this->set(compact('membres', 'membres'));
+		$membres = $this->Membre->find('list', array(
+			'fields' => array('Membre.email')
+		));
+		
+		$this->set(compact('membres'));
 	}
 
 /**
@@ -82,9 +86,12 @@ class ProjetsController extends AppController {
 			$options = array('conditions' => array('Projet.' . $this->Projet->primaryKey => $id));
 			$this->request->data = $this->Projet->find('first', $options);
 		}
-		$membres = $this->Projet->Membre->find('list');
-		$membres = $this->Projet->Membre->find('list');
-		$this->set(compact('membres', 'membres'));
+		
+		$membres = $this->Membre->find('list', array(
+			'fields' => array('Membre.nom')
+		));
+		
+		$this->set(compact('membres'));
 	}
 
 /**
