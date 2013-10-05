@@ -1,35 +1,75 @@
-<div class="membres form">
-<?php echo $this->Form->create('Membre'); ?>
+﻿<div class="membres form">
+<?php echo $this->Form->create('Membre', array('class' => 'mainForm')); ?>
 	<fieldset>
-		<legend><?php echo __('Add Membre'); ?></legend>
-	<?php
-		echo $this->Form->input('nom');
-		echo $this->Form->input('prenom');
-		echo $this->Form->input('email');
-		echo $this->Form->input('datenaissance');
-		echo $this->Form->input('dateinscription');
-		echo $this->Form->input('section_id');
-		echo $this->Form->input('Competence');
-		echo $this->Form->input('Poste');
-		echo $this->Form->input('Projet');
-	?>
+		<div class="widget">
+			<div class="head">
+				<h5 class="iList"><?php echo __('Add Membre'); ?></h5>
+			</div>
+			
+			<div class="rowElem noborder">
+				<label><?php echo __('Nom'); ?></label>
+				<div class="formRight">
+					<input name="data[Membre][nom]" maxlength="150" type="text">
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('Prénom'); ?></label>
+				<div class="formRight">
+					<input name="data[Membre][prenom]" maxlength="150" type="text">
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('E-mail'); ?></label>
+				<div class="formRight">
+					<input name="data[Membre][email]" type="text" class="validate[required,custom[email]]">
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('Date de naissance'); ?></label>
+				<div class="formRight">
+					<input type="text" class="validate[custom[date],future[NOW]]" name="data[Membre][datenaissance]">
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('Section'); ?></label> 
+				<div class="formRight">
+					<input type="hidden" name="data[Membre][section_id]" id="MembreSectionId_" value="">
+				<?php foreach ($sections as $key => $section) : ?>
+					<label><input type="radio" name="data[Membre][section_id]" value="<?php echo $key; ?>"> <?php echo $section; ?> </label>
+					<div class="fix"></div>
+				<?php endforeach; ?>
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('Compétences'); ?></label>
+				<div class="formRight">
+					<?php echo $this->Form->input('Competence', array('div' => false, 'label' => false, 'class' => 'multiple')); ?>					
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<div class="rowElem">
+				<label><?php echo __('Poste'); ?></label>
+				<div class="formRight">
+					<?php echo $this->Form->input('Poste', array('div' => false, 'label' => false, 'type' => 'select')); ?>					
+				</div>
+				<div class="fix"></div>
+			</div>
+			
+			<?php echo $this->Form->submit(__('Enregistrer'), array('div' => false, 'class' => 'greyishBtn submitForm')); ?>
+			
+			<div class="fix"></div>
+		</div>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Membres'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Sections'), array('controller' => 'sections', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Section'), array('controller' => 'sections', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projets'), array('controller' => 'projets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Projet'), array('controller' => 'projets', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Remarques'), array('controller' => 'remarques', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Remarque'), array('controller' => 'remarques', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Competences'), array('controller' => 'competences', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Competence'), array('controller' => 'competences', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Postes'), array('controller' => 'postes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Poste'), array('controller' => 'postes', 'action' => 'add')); ?> </li>
-	</ul>
+<?php echo $this->Form->end(); ?>
 </div>

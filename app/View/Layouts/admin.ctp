@@ -43,7 +43,7 @@
     	<ul>
         	<li class="iMes"><a href="#" title=""><span>Support tickets</span></a><span class="numberMiddle">9</span></li>
             <li class="iStat"><a href="#" title=""><span>Statistics</span></a></li>
-            <li class="iUser"><a href="#" title=""><span>User list</span></a></li>
+            <li class="iUser"><a href="<?php echo $this->Html->url(array('controller' => 'membres', 'action' => 'index')); ?>" title=""><span><?php echo __('Liste des membres'); ?></span></a></li>
             <li class="iOrders"><a href="#" title=""><span>Billing panel</span></a></li>
         </ul>
     </div>
@@ -57,19 +57,10 @@
 	<!-- Left navigation -->
     <div class="leftNav">
     	<ul id="menu">
-        	<li class="contacts"><a href="index.html" title="" class="active"><span>Membres</span></a></li>
-            <li class="graphs"><a href="charts.html" title=""><span>Graphs and charts</span></a></li>
-            <li class="login"><a href="ui_elements.html" title=""><span>Membres</span></a></li>
-            <li class="forms"><a href="form_elements.html" title=""><span>Nouveau membre</span></a></li>
-            <li class="typo"><a href="typo.html" title=""><span>Remarques</span></a></li>
-            <li class="tables"><a href="tables.html" title=""><span>Sections</span></a></li>
-            <li class="cal"><a href="calendar.html" title=""><span>Calendar</span></a></li>
-            <li class="gallery"><a href="gallery.html" title=""><span>Gallery</span></a></li>
-            <li class="widgets"><a href="widgets.html" title=""><span>Widgets</span></a></li>
-            <li class="files"><a href="file_manager.html" title=""><span>Projets</span></a></li>
-            <li class="errors"><a href="#" title="" class="exp"><span>Error pages</span><span class="numberLeft">6</span></a></li>
+        	<li class="contacts"><a href="<?php echo $this->Html->url(array('controller' => 'membres', 'action' => 'index')); ?>" title="" class="active"><span><?php echo __('Membres'); ?></span></a></li>
+            <li class="tables"><a href="<?php echo $this->Html->url(array('controller' => 'sections', 'action' => 'index')); ?>" title=""><span><?php echo __('Sections'); ?></span></a></li>
+            <li class="files"><a href="<?php echo $this->Html->url(array('controller' => 'projets', 'action' => 'index')); ?>" title=""><span><?php echo __('Projets'); ?></span></a></li>
             <li class="pic"><a href="icons.html" title=""><span>Compétences</span></a></li>
-            <li class="dash"><a href="contacts.html" title=""><span>Tableau de bord</span></a></li>
         </ul>
     </div>
     

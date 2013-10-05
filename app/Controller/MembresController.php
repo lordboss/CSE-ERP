@@ -47,6 +47,7 @@ class MembresController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
 			$this->Membre->create();
 			if ($this->Membre->save($this->request->data)) {
@@ -56,10 +57,18 @@ class MembresController extends AppController {
 				$this->Session->setFlash(__('The membre could not be saved. Please, try again.'));
 			}
 		}
-		$sections = $this->Membre->Section->find('list');
-		$competences = $this->Membre->Competence->find('list');
-		$postes = $this->Membre->Poste->find('list');
-		$projets = $this->Membre->Projet->find('list');
+		$sections = $this->Membre->Section->find('list', array(
+			'fields' => array('Section.nom')
+		));
+		$competences = $this->Membre->Competence->find('list', array(
+			'fields' => array('Competence.nom')
+		));
+		$postes = $this->Membre->Poste->find('list', array(
+			'fields' => array('Poste.nom')
+		));
+		$projets = $this->Membre->Projet->find('list', array(
+			'fields' => array('Projet.nom')
+		));
 		$this->set(compact('sections', 'competences', 'postes', 'projets'));
 	}
 
