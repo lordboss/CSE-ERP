@@ -1,4 +1,17 @@
-﻿<div class="membres form">
+﻿<div class="title"><h5><?php echo __('Membres'); ?></h5></div>
+        
+<!-- Statistics -->
+<div class="stats">
+	<ul>
+		<li><a href="#" class="count grey" title="">7</a><span>Projets en cours</span></li> 
+		<li><a href="#" class="count grey" title="">520</a><span>Adhérents</span></li>
+		<li><a href="#" class="count grey" title="">163</a><span>Membres</span></li>
+		<li class="last"><a href="#" class="count grey" title="">78</a><span>Membres actifs</span></li>
+	</ul>
+	<div class="fix"></div>
+</div>
+
+<div class="membres form">
 <?php echo $this->Form->create('Membre', array('class' => 'mainForm')); ?>
 	<fieldset>
 		<div class="widget">

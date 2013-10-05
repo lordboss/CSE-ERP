@@ -1,5 +1,22 @@
+<div class="title"><h5><?php echo __('Membres'); ?></h5></div>
+
+<div class="widget">
+	<div class="head">
+		<h5>ok</h5>
+	</div>
+	<div class="body">
+		<div class="alignleft">
+			<a href="#" class="btn55 mr10 aligncenter">
+				<img src="images/icons/middlenav/pencil.png">
+				<span><?php echo __('Nouveau membre'); ?></span>
+			</a>
+		</div>
+	</div>
+</div>
+
+
 <div class="table">
-    <div class="head"><h5 class="iFrames"><?php echo __('Membres'); ?></h5></div>
+    <div class="head"><h5 class="iUsers"><?php echo __('Membres'); ?></h5></div>
 	<table cellpadding="0" cellspacing="0" border="0" class="display">
 		<thead>
 			<tr>

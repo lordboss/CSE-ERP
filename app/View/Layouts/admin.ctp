@@ -66,19 +66,7 @@
     
     <!-- Content -->
     <div class="content">
-    	<div class="title"><h5>Dashboard</h5></div>
-        
-        <!-- Statistics -->
-        <div class="stats">
-        	<ul>
-            	<li><a href="#" class="count grey" title="">7</a><span>Projets en cours</span></li> 
-                <li><a href="#" class="count grey" title="">520</a><span>Adhérents</span></li>
-                <li><a href="#" class="count grey" title="">163</a><span>Membres</span></li>
-                <li class="last"><a href="#" class="count grey" title="">78</a><span>Membres actifs</span></li>
-            </ul>
-            <div class="fix"></div>
-        </div>
-		
+   
 		<?php echo $this->Session->flash(); ?>
 
 		<?php echo $this->fetch('content'); ?>
