@@ -8,7 +8,6 @@
 				<th><?php echo $this->Paginator->sort('prenom'); ?></th>
 				<th><?php echo $this->Paginator->sort('email'); ?></th>
 				<th><?php echo $this->Paginator->sort('datenaissance'); ?></th>
-				<th><?php echo $this->Paginator->sort('dateinscription'); ?></th>
 				<th><?php echo $this->Paginator->sort('section_id'); ?></th>
 				<th class="actions"><?php echo __('Actions'); ?></th>
 			</tr>
@@ -21,9 +20,8 @@
 				<td><?php echo h($membre['Membre']['prenom']); ?>&nbsp;</td>
 				<td><?php echo h($membre['Membre']['email']); ?>&nbsp;</td>
 				<td><?php echo h($membre['Membre']['datenaissance']); ?>&nbsp;</td>
-				<td><?php echo h($membre['Membre']['dateinscription']); ?>&nbsp;</td>
 				<td>
-					<?php echo $this->Html->link($membre['Section']['id'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
+					<?php echo $this->Html->link($membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
 				</td>
 				<td class="actions">
 					<?php echo $this->Html->link(__('View'), array('action' => 'view', $membre['Membre']['id'])); ?>
