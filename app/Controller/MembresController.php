@@ -9,6 +9,10 @@ App::uses('AppController', 'Controller');
 class MembresController extends AppController {
 
 	public $components = array('Paginator');
+
+
+	public $uses = array('Projet', 'MembresProjet', 'Membre');
+
 /**
  * index method
  *
