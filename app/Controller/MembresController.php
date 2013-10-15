@@ -8,13 +8,7 @@ App::uses('AppController', 'Controller');
  */
 class MembresController extends AppController {
 
-/**
- * Components
- *
- * @var array
- */
 	public $components = array('Paginator');
-
 /**
  * index method
  *
@@ -23,7 +17,8 @@ class MembresController extends AppController {
 	public function index() {
 		$this->layout = 'admin';
 		$this->Membre->recursive = 1;
-		$this->set('membres', $this->Paginator->paginate());
+		$membres = $this->Paginator->paginate();
+		$this->set('membres', $membres);
 	}
 
 /**
@@ -38,8 +33,11 @@ class MembresController extends AppController {
 		if (!$this->Membre->exists($id)) {
 			throw new NotFoundException(__('Invalid membre'));
 		}
+		
 		$options = array('conditions' => array('Membre.' . $this->Membre->primaryKey => $id));
-		$this->set('membre', $this->Membre->find('first', $options));
+		$membre = $this->Membre->find('first', $options);
+				
+		$this->set('membre', $membre);
 	}
 
 /**
@@ -71,6 +69,10 @@ class MembresController extends AppController {
 			'fields' => array('Projet.nom')
 		));
 		$this->set(compact('sections', 'competences', 'postes', 'projets'));
+	}
+	
+	public function addCompetence() {
+	
 	}
 
 /**
@@ -121,4 +123,5 @@ class MembresController extends AppController {
 			$this->Session->setFlash(__('The membre could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+}
