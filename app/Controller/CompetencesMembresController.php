@@ -14,6 +14,8 @@ class CompetencesMembresController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+	
+	public $uses = array('Membre', 'Competence', 'CompetencesMembre');
 
 /**
  * index method
@@ -45,16 +47,28 @@ class CompetencesMembresController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($membre_id = null) {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			if ($membre_id != null)
+				$data['CompetencesMembre']['membre_id'] = $membre_id;
+			
 			$this->CompetencesMembre->create();
-			if ($this->CompetencesMembre->save($this->request->data)) {
+			if ($this->CompetencesMembre->save($data)) {
 				$this->Session->setFlash(__('The competences membre has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'membres', 'action' => 'view', $membre_id));
 			} else {
 				$this->Session->setFlash(__('The competences membre could not be saved. Please, try again.'));
 			}
 		}
+		$membres = $this->Membre->find('list', array(
+			'fields' => array('Membre.nom')
+		));
+		$competences = $this->Competence->find('list', array(
+			'fields' => array('Competence.nom')
+		));
+		$this->set(compact('membres', 'competences'));
 	}
 
 /**
@@ -90,6 +104,9 @@ class CompetencesMembresController extends AppController {
  */
 	public function delete($id = null) {
 		$this->CompetencesMembre->id = $id;
+		
+		$CompetencesMembre = $this->CompetencesMembre->find();
+		
 		if (!$this->CompetencesMembre->exists()) {
 			throw new NotFoundException(__('Invalid competences membre'));
 		}
@@ -99,5 +116,5 @@ class CompetencesMembresController extends AppController {
 		} else {
 			$this->Session->setFlash(__('The competences membre could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+		return $this->redirect(array('controller' => 'membres', 'action' => 'view', $CompetencesMembre['Membre']['id']));
 	}}
