@@ -45,18 +45,20 @@ class RemarquesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($membre_id = null) {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			if ($membre_id != null)
+				$data['Remarque']['membre_id'] = $membre_id;
 			$this->Remarque->create();
-			if ($this->Remarque->save($this->request->data)) {
+			if ($this->Remarque->save($data)) {
 				$this->Session->setFlash(__('The remarque has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'membres', 'action' => 'view', $membre_id));
 			} else {
 				$this->Session->setFlash(__('The remarque could not be saved. Please, try again.'));
 			}
 		}
-		$membres = $this->Remarque->Membre->find('list');
-		$this->set(compact('membres'));
 	}
 
 /**

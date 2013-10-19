@@ -1,22 +1,34 @@
-<div class="membresProjets form">
-<?php echo $this->Form->create('MembresProjet'); ?>
-	<fieldset>
-		<legend><?php echo __('Add Membres Projet'); ?></legend>
-	<?php
-		echo $this->Form->input('membre_id');
-		echo $this->Form->input('projet_id');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<div class="title"><h5><?php echo __('Projet'); ?></h5></div>
 
-		<li><?php echo $this->Html->link(__('List Membres Projets'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Membres'), array('controller' => 'membres', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Membre'), array('controller' => 'membres', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projets'), array('controller' => 'projets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Projet'), array('controller' => 'projets', 'action' => 'add')); ?> </li>
-	</ul>
+<div class="form">
+	<?php echo $this->Form->create('Membre', array('class' => 'mainForm')); ?>
+		<fieldset>
+			<div class="widget">
+				<div class="head">
+					<h5 class="iList"><?php echo __('Ajouter un membre au projet'); ?></h5>
+				</div>
+				
+				<div class="rowElem noborder">
+					<label><?php echo __('Membre'); ?></label>
+					<div class="formRight">
+						<select name="data[MembresProjet][membre_id]">
+							<?php 
+							foreach ($membres as $membre) {
+								$id = $membre['membres']['id'];
+								$fullname = $membre['membres']['nom'] . ' ' . $membre['membres']['prenom'];
+								$email = $membre['membres']['email'];
+								echo "<option value='$id'> $fullname ($email) </option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="fix"></div>
+				</div>
+				
+				<?php echo $this->Form->submit(__('Enregistrer'), array('div' => false, 'class' => 'greyishBtn submitForm')); ?>
+				
+				<div class="fix"></div>
+			</div>
+		</fieldset>
+	<?php echo $this->Form->end(); ?>
 </div>

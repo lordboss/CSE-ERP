@@ -1,50 +1,50 @@
-<div class="projets index">
-	<h2><?php echo __('Projets'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('nom'); ?></th>
-			<th><?php echo $this->Paginator->sort('description'); ?></th>
-			<th><?php echo $this->Paginator->sort('url'); ?></th>
-			<th><?php echo $this->Paginator->sort('membre_id'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php foreach ($projets as $projet): ?>
-	<tr>
-		<td><?php echo h($projet['Projet']['id']); ?>&nbsp;</td>
-		<td><?php echo h($projet['Projet']['nom']); ?>&nbsp;</td>
-		<td><?php echo h($projet['Projet']['description']); ?>&nbsp;</td>
-		<td><?php echo h($projet['Projet']['url']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($projet['Membre']['id'], array('controller' => 'membres', 'action' => 'view', $projet['Membre']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $projet['Projet']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $projet['Projet']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $projet['Projet']['id']), null, __('Are you sure you want to delete # %s?', $projet['Projet']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+<div class="title"><h5><?php echo __('Projets'); ?></h5></div>
+
+<div class="table">
+    <div class="head"><h5 class="iUsers"><?php echo __('Projets'); ?></h5></div>
+	<table cellpadding="0" cellspacing="0" border="0" class="display">
+		<thead>
+			<tr>
+				<th><?php echo $this->Paginator->sort('id'); ?></th>
+				<th><?php echo $this->Paginator->sort('nom du projet'); ?></th>
+				<th><?php echo $this->Paginator->sort('url'); ?></th>
+				<th>Progression</th>
+				<th><?php echo $this->Paginator->sort('membre_id'); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ($projets as $projet): ?>
+				<tr>
+					<?php
+						$link = $this->Html->url(array('controller' => 'projets', 'action' => 'view', $projet['Projet']['id']));
+					?>
+					<td align="center"><?php echo h($projet['Projet']['id']); ?></td>
+					<td><a href="<?php echo $link; ?>"><?php echo h($projet['Projet']['nom']); ?></a></td>
+					<td><a href="<?php echo $projet['Projet']['url']; ?>"><?php echo $projet['Projet']['url']; ?></a></td>
+					<td>
+						<div id="progressbar" class="ui-progressbar ui-widget ui-widget-content ui-corner-all" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+							<div class="ui-progressbar-value ui-widget-header ui-corner-left" style="width: <?php echo $projet['Projet']['progression'] ?>%;"></div>
+						</div>
+					</td>
+					<td>ok</td>
+				</tr>
+			<?php endforeach; ?>
+		</tbody>
 	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
+	
+	<div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix">
+		<div class="dataTables_paginate fg-buttonset ui-buttonset fg-buttonset-multi ui-buttonset-multi paging_full_numbers" id="example_paginate">
+<?php
+	echo $this->Paginator->first('First', array('class' => 'toFirst ui-corner-tl ui-corner-bl fg-button ui-button'), null, array('class' => 'toFirst ui-corner-tl ui-corner-bl fg-button ui-button ui-state-disabled'));
+	echo $this->Paginator->prev('Prev', array('class' => 'previous fg-button ui-button'), null, array('class' => 'previous fg-button ui-button ui-state-disabled'));
+?>
+<span>
+	<?php echo $this->Paginator->numbers(array('separator' => '', 'class' => 'fg-button ui-button', 'currentClass' => 'ui-state-disabled', 'modulus' => 20)); ?>
+</span>
+<?php
+	echo $this->Paginator->next('Next', array('class' => 'next fg-button ui-button'), null, array('class' => 'next fg-button ui-button ui-state-disabled'));
+	echo $this->Paginator->last('Last', array('class' => 'last ui-corner-tr ui-corner-br fg-button ui-button'), null, array('class' => 'last ui-corner-tr ui-corner-br fg-button ui-button ui-state-disabled'));
+?>
+		</div>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Projet'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Membres'), array('controller' => 'membres', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Membre'), array('controller' => 'membres', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

@@ -1,16 +1,4 @@
-﻿<div class="title"><h5><?php echo __('Membres'); ?></h5></div>
-
-<!-- Statistics -->
-<div class="stats">
-	<ul>
-		<li><a href="#" class="count grey" title="">7</a><span>Projets en cours</span></li> 
-		<li><a href="#" class="count grey" title="">520</a><span>Adhérents</span></li>
-		<li><a href="#" class="count grey" title="">163</a><span>Membres</span></li>
-		<li class="last"><a href="#" class="count grey" title="">78</a><span>Membres actifs</span></li>
-	</ul>
-	<div class="fix"></div>
-</div>
-
+<div class="title"><h5><?php echo __('Membres'); ?></h5></div>
 <div class="membres form">
 	<?php echo $this->Form->create('Membre', array('class' => 'mainForm')); ?>
 		<fieldset>
@@ -47,6 +35,10 @@
 					<label><?php echo __('Date de naissance'); ?></label>
 					<div class="formRight">
 						<input type="text" class="validate[custom[date],future[NOW]]" name="data[Membre][datenaissance]">
+						<?php
+							if (isset($erreurs['datenaissance']))
+								echo "<span class='red'>La date est incorrecte, le format est yyyy-mm-dd</span>";
+						?>
 					</div>
 					<div class="fix"></div>
 				</div>

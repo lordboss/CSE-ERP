@@ -45,16 +45,28 @@ class MembresProjetsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($projet_id = null) {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			if ($projet_id != null)
+				$data['MembresProjet']['projet_id'] = $projet_id;
+
 			$this->MembresProjet->create();
-			if ($this->MembresProjet->save($this->request->data)) {
+			if ($this->MembresProjet->save($data)) {
 				$this->Session->setFlash(__('The membres projet has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'projets', 'action' => 'view', $projet_id));
 			} else {
 				$this->Session->setFlash(__('The membres projet could not be saved. Please, try again.'));
 			}
 		}
+
+		$membres = $this->MembresProjet->query(
+		   'select membres.id, membres.nom, membres.prenom, membres.email from membres
+		   	order by membres.nom, membres.prenom'
+		);
+		
+		$this->set(compact('membres'));
 	}
 
 /**

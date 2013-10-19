@@ -15,6 +15,8 @@ class MembresPostesController extends AppController {
  */
 	public $components = array('Paginator');
 
+	public $uses = array('Poste', 'MembresPoste');
+
 /**
  * index method
  *
@@ -45,16 +47,26 @@ class MembresPostesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function add($membre_id = null) {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			if ($membre_id != null)
+				$data['MembresPoste']['membre_id'] = $membre_id;
 			$this->MembresPoste->create();
-			if ($this->MembresPoste->save($this->request->data)) {
+			if ($this->MembresPoste->save($data)) {
 				$this->Session->setFlash(__('The membres poste has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('controller' => 'membres', 'action' => 'view', $membre_id));
 			} else {
 				$this->Session->setFlash(__('The membres poste could not be saved. Please, try again.'));
 			}
 		}
+
+		$postes = $this->Poste->find('list', array(
+			'fields' => array('Poste.nom')
+		));
+
+		$this->set(compact('postes'));
 	}
 
 /**
@@ -90,14 +102,23 @@ class MembresPostesController extends AppController {
  */
 	public function delete($id = null) {
 		$this->MembresPoste->id = $id;
+		
 		if (!$this->MembresPoste->exists()) {
 			throw new NotFoundException(__('Invalid membres poste'));
 		}
+
+		$MembresPoste = $this->MembresPoste->find('first', array(
+			'conditions' => array(
+				'MembresPoste.id' => $id
+		)));
+
+
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->MembresPoste->delete()) {
 			$this->Session->setFlash(__('The membres poste has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The membres poste could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'index'));
+
+		return $this->redirect(array('controller' => 'membres', 'action' => 'view', $MembresPoste['Membre']['id']));
 	}}

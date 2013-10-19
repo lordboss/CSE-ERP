@@ -106,6 +106,10 @@ class CompetencesMembresController extends AppController {
 		$this->CompetencesMembre->id = $id;
 		
 		$CompetencesMembre = $this->CompetencesMembre->find();
+		$CompetencesMembre = $this->CompetencesMembre->find('first', array(
+			'conditions' => array(
+				'CompetencesMembre.id' => $id
+		)));
 		
 		if (!$this->CompetencesMembre->exists()) {
 			throw new NotFoundException(__('Invalid competences membre'));

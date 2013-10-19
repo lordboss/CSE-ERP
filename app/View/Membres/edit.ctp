@@ -1,37 +1,83 @@
+<div class="title"><h5><?php echo __('Membres'); ?></h5></div>
 <div class="membres form">
-<?php echo $this->Form->create('Membre'); ?>
-	<fieldset>
-		<legend><?php echo __('Edit Membre'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('nom');
-		echo $this->Form->input('prenom');
-		echo $this->Form->input('email');
-		echo $this->Form->input('datenaissance');
-		echo $this->Form->input('dateinscription');
-		echo $this->Form->input('section_id');
-		echo $this->Form->input('Competence');
-		echo $this->Form->input('Poste');
-		echo $this->Form->input('Projet');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+	<?php echo $this->Form->create('Membre', array('class' => 'mainForm')); ?>
+		<fieldset>
+			<div class="widget">
+				<div class="head">
+					<h5 class="iList"><?php echo __('Add Membre'); ?></h5>
+				</div>
+				
+				<div class="rowElem noborder">
+					<label><?php echo __('Nom'); ?></label>
+					<div class="formRight">
+						<input name="data[Membre][nom]" value="<?php echo $membres['membres']['nom']; ?>" maxlength="150" type="text">
+					</div>
+					<div class="fix"></div>
+				</div>
+				
+				<div class="rowElem">
+					<label><?php echo __('Prénom'); ?></label>
+					<div class="formRight">
+						<input name="data[Membre][prenom]" value="<?php echo $membres['membres']['prenom']; ?>" maxlength="150" type="text">
+					</div>
+					<div class="fix"></div>
+				</div>
+				
+				<div class="rowElem">
+					<label><?php echo __('E-mail'); ?></label>
+					<div class="formRight">
+						<input name="data[Membre][email]" value="<?php echo $membres['membres']['email']; ?>" type="text" class="validate[required,custom[email]]">
+					</div>
+					<div class="fix"></div>
+				</div>
+				
+				<div class="rowElem">
+					<label><?php echo __('Date de naissance'); ?></label>
+					<div class="formRight">
+						<input type="text" value="<?php echo $membres['membres']['datenaissance']; ?>" class="validate[custom[date]]" name="data[Membre][datenaissance]">
+						<?php
+							if (isset($erreurs['datenaissance']))
+								echo "<span class='red'>La date est incorrecte, le format est yyyy-mm-dd</span>";
+						?>
+					</div>
+					<div class="fix"></div>
+				</div>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Membre.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Membre.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Membres'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Sections'), array('controller' => 'sections', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Section'), array('controller' => 'sections', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projets'), array('controller' => 'projets', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Projet'), array('controller' => 'projets', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Remarques'), array('controller' => 'remarques', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Remarque'), array('controller' => 'remarques', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Competences'), array('controller' => 'competences', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Competence'), array('controller' => 'competences', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Postes'), array('controller' => 'postes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Poste'), array('controller' => 'postes', 'action' => 'add')); ?> </li>
-	</ul>
+				<div class="rowElem">
+					<label><?php echo __('Date d\'inscription'); ?></label>
+					<div class="formRight">
+						<input type="text" value="<?php echo $membres['membres']['dateinscription']; ?>" class="validate[custom[date]]" name="data[Membre][dateinscription]">
+						<?php
+							if (isset($erreurs['dateinscription']))
+								echo "<span class='red'>La date est incorrecte, le format est yyyy-mm-dd</span>";
+						?>
+					</div>
+					<div class="fix"></div>
+				</div>
+				
+				<div class="rowElem">
+					<label><?php echo __('Section'); ?></label> 
+					<div class="formRight">
+						<input type="hidden" name="data[Membre][section_id]" id="MembreSectionId_" value="">
+					
+						<?php 
+						foreach ($sections as $key => $section) {
+							if ($key != $membres['membres']['section_id'])
+								echo "<label><input type='radio' name='data[Membre][section_id]' value='$key'> $section</label>";
+							else
+								echo "<label><input type='radio' name='data[Membre][section_id]' value='$key' checked> $section</label>";
+							echo "<div class='fix'></div>";
+						} 
+						?>
+					</div>
+
+					<div class="fix"></div>
+				</div>
+				
+				<?php echo $this->Form->submit(__('Enregistrer'), array('div' => false, 'class' => 'greyishBtn submitForm')); ?>
+				
+				<div class="fix"></div>
+			</div>
+		</fieldset>
+	<?php echo $this->Form->end(); ?>
 </div>

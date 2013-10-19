@@ -14,8 +14,6 @@ class ProjetsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
-	
-	public $uses = array('Membre', 'Projet');
 
 /**
  * index method
@@ -23,8 +21,10 @@ class ProjetsController extends AppController {
  * @return void
  */
 	public function index() {
+		$this->layout = 'admin';
 		$this->Projet->recursive = 0;
-		$this->set('projets', $this->Paginator->paginate());
+		$projets = $this->Paginator->paginate();
+		$this->set('projets', $projets);
 	}
 
 /**
@@ -35,11 +35,21 @@ class ProjetsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->layout = 'admin';
 		if (!$this->Projet->exists($id)) {
 			throw new NotFoundException(__('Invalid projet'));
 		}
 		$options = array('conditions' => array('Projet.' . $this->Projet->primaryKey => $id));
 		$this->set('projet', $this->Projet->find('first', $options));
+
+		$membres = $this->Projet->query(
+		   'select membres.id, membres.nom, membres.prenom, membres.email
+			from membres_projets 
+			join membres on (membres_projets.membre_id = membres.id)
+			where membres_projets.projet_id = '. $id
+		);
+
+		$this->set(compact('membres'));
 	}
 
 /**
@@ -48,18 +58,31 @@ class ProjetsController extends AppController {
  * @return void
  */
 	public function add() {
+		$this->layout = 'admin';
 		if ($this->request->is('post')) {
+			$data = $this->request->data;
+			$data['Projet']['progression'] = 0;
+
 			$this->Projet->create();
-			if ($this->Projet->save($this->request->data)) {
+			if ($this->Projet->save($data)) {
 				$this->Session->setFlash(__('The projet has been saved.'));
+
+				$projet_id = $this->Projet->getLastInsertID();
+
+				$membre_projet['MembresProjet']['projet_id'] = $projet_id;
+				$membre_projet['MembresProjet']['membre_id'] = $data['Projet']['membre_id'];
+				$this->Projet->MembresProjet->save($membre_projet);
+
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The projet could not be saved. Please, try again.'));
 			}
 		}
-		$membres = $this->Membre->find('list', array(
-			'fields' => array('Membre.email')
-		));
+
+		$membres = $this->Projet->query(
+		   'select membres.id, membres.nom, membres.prenom, membres.email from membres
+		   	order by membres.nom, membres.prenom'
+		);
 		
 		$this->set(compact('membres'));
 	}
@@ -92,6 +115,19 @@ class ProjetsController extends AppController {
 		));
 		
 		$this->set(compact('membres'));
+	}
+
+	public function progression() {
+		if ($this->request->is(array('post', 'put'))) {
+			$data = $this->request->data;
+			
+			if ($this->Projet->save($data)) {
+				$this->Session->setFlash(__('The projet has been saved.'));
+				return $this->redirect(array('controller' => 'projets', 'action' => 'view', $data['Projet']['id']));
+			} else {
+				$this->Session->setFlash(__('The projet could not be saved. Please, try again.'));
+			}
+		}
 	}
 
 /**

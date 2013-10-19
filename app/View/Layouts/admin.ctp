@@ -7,9 +7,15 @@
 <?php echo $this->Html->css(array('main')); ?>
 <?php echo $this->Html->script(array(
 			'jquery-1.4.4', 
-			'spinner/jquery.mousewheel',
 			'spinner/ui.spinner',
+			'spinner/jquery.mousewheel',
+			'jquery-ui.min',
 			'fileManager/elfinder.min',
+			'wysiwyg/jquery.wysiwyg',
+			'wysiwyg/jquery.wysiwyg',
+			'wysiwyg/wysiwyg.image',
+			'wysiwyg/wysiwyg.link',
+			'wysiwyg/wysiwyg.table',
 			'flot/jquery.flot',
 			'flot/jquery.flot.pie',
 			'flot/excanvas.min',
@@ -68,10 +74,7 @@
     <div class="logo"><a href="/" title=""><?php echo $this->Html->image('/images/loginLogo.png'); ?></a></div>
     <div class="middleNav">
     	<ul>
-        	<li class="iMes"><a href="#" title=""><span>Support tickets</span></a><span class="numberMiddle">9</span></li>
-            <li class="iStat"><a href="#" title=""><span>Statistics</span></a></li>
             <li class="iUser"><a href="<?php echo $this->Html->url(array('controller' => 'membres', 'action' => 'index')); ?>" title=""><span><?php echo __('Liste des membres'); ?></span></a></li>
-            <li class="iOrders"><a href="#" title=""><span>Billing panel</span></a></li>
         </ul>
     </div>
     <div class="fix"></div>
@@ -84,10 +87,21 @@
 	<!-- Left navigation -->
     <div class="leftNav">
     	<ul id="menu">
-        	<li class="contacts"><a href="<?php echo $this->Html->url(array('controller' => 'membres', 'action' => 'index')); ?>" title="" class="active"><span><?php echo __('Membres'); ?></span></a></li>
-            <li class="tables"><a href="<?php echo $this->Html->url(array('controller' => 'sections', 'action' => 'index')); ?>" title=""><span><?php echo __('Sections'); ?></span></a></li>
-            <li class="files"><a href="<?php echo $this->Html->url(array('controller' => 'projets', 'action' => 'index')); ?>" title=""><span><?php echo __('Projets'); ?></span></a></li>
-            <li class="pic"><a href="icons.html" title=""><span>Compétences</span></a></li>
+        	<li class="contacts">
+        		<a href="<?php echo $this->Html->url(array('controller' => 'membres', 'action' => 'index')); ?>">
+        			<span><?php echo __('Membres'); ?></span>
+        		</a>
+        	</li>
+            <li class="tables">
+            	<a href="<?php echo $this->Html->url(array('controller' => 'sections', 'action' => 'index')); ?>">
+            		<span><?php echo __('Sections'); ?></span>
+            	</a>
+            </li>
+            <li class="files">
+            	<a href="<?php echo $this->Html->url(array('controller' => 'projets', 'action' => 'index')); ?>">
+            		<span><?php echo __('Projets'); ?></span>
+            	</a>
+            </li>	
         </ul>
     </div>
     

@@ -1,5 +1,19 @@
 <div class="title"><h5><?php echo __('Membres'); ?></h5></div>
 
+<div class="widgets">
+	<div class="right">
+		<div class="searchWidget">
+        	<?php echo $this->Form->create('Membre', array('action' => 'find')); ?>
+            	<input type="text" name="data[Membre][query]" placeholder="Enter search text...">
+                <input type="submit" value="">
+            <?php echo $this->Form->end(); ?>
+        </div>
+
+	</div>
+</div>
+
+<div class="fix"></div>
+
 <div class="table">
     <div class="head"><h5 class="iUsers"><?php echo __('Membres'); ?></h5></div>
 	<table cellpadding="0" cellspacing="0" border="0" class="display">
@@ -14,21 +28,21 @@
 		</thead>
 		<tbody>
 			<?php foreach ($membres as $membre): ?>
-			<tr>
-				<td><?php echo h($membre['Membre']['id']); ?></td>
-				<td><?php echo h($membre['Membre']['nom']); ?></td>
-				<td><?php echo h($membre['Membre']['prenom']); ?></td>
-				<td>
-					<?php echo $this->Html->link($membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
-				</td>
-				<td class="actions">
-					<a href="<?php echo $this->Html->url(array('action' => 'view', $membre['Membre']['id'])); ?>" title="Afficher le profil" class="btn14 mr5"><img src="/CSE-ERP/images/icons/dark/user.png" alt=""></a>
-					
-					<a href="<?php echo $this->Html->url(array('action' => 'edit', $membre['Membre']['id'])); ?>" title="Modifier le profil" class="btn14 mr5"><img src="/CSE-ERP/images/icons/dark/pencil.png" alt=""></a>
-					
-					<?php echo $this->Form->postLink("<img src='/CSE-ERP/images/icons/dark/trash.png' alt=''>", array('action' => 'delete', $membre['Membre']['id']), array('escape' => false, 'class' => 'btn14 mr5'), __('Are you sure you want to delete # %s?', $membre['Membre']['id'])); ?>
-				</td>
-			</tr>
+				<tr>
+					<td align="center"><?php echo h($membre['Membre']['id']); ?></td>
+					<td><?php echo h($membre['Membre']['nom']); ?></td>
+					<td><?php echo h($membre['Membre']['prenom']); ?></td>
+					<td>
+						<?php echo $this->Html->link($membre['Section']['nom'], array('controller' => 'sections', 'action' => 'view', $membre['Section']['id'])); ?>
+					</td>
+					<td class="actions" align="center">
+						<a href="<?php echo $this->Html->url(array('action' => 'view', $membre['Membre']['id'])); ?>" title="Afficher le profil" class="btn14 mr5"><img src="/CSE-ERP/images/icons/dark/user.png" alt=""></a>
+						
+						<a href="<?php echo $this->Html->url(array('action' => 'edit', $membre['Membre']['id'])); ?>" title="Modifier le profil" class="btn14 mr5"><img src="/CSE-ERP/images/icons/dark/pencil.png" alt=""></a>
+						
+						<?php echo $this->Form->postLink("<img src='/CSE-ERP/images/icons/dark/trash.png' alt=''>", array('action' => 'delete', $membre['Membre']['id']), array('escape' => false, 'class' => 'btn14 mr5'), __('Are you sure you want to delete # %s?', $membre['Membre']['id'])); ?>
+					</td>
+				</tr>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
@@ -49,4 +63,3 @@
 		</div>
 	</div>
 </div>
-
